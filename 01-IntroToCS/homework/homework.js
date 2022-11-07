@@ -9,16 +9,12 @@ function BinarioADecimal(num) {
     decimal += num[i] * 2 ** (num.length - 1 - i);
   }
 
- // for(var i = 0; i < num.length; i++) {
- //    decimal = decimal + num[i] * Math.pow(2, num.length - 1 - i);
- // }
-
   return decimal;
 }
 
 function DecimalABinario(num) {
   // tu codigo aca
-  
+
   var binario = [];
    
   while(num >= 1) {
@@ -27,15 +23,6 @@ function DecimalABinario(num) {
   }
 
   return binario.join("");
-  
-  // var binario = (num % 2).toString();
-
-  // for (; num > 1; ) {
-  //    num = parseInt(num / 2);
-  //    binario = (num % 2) + (binario);
-  // }
-
-  // return binario;
 }
 
    
