@@ -22,16 +22,16 @@ var c = function(a, b, c) {
     var x = 5;
   }
   f(a,b,c); 
-  console.log(b); // 10
+  console.log(b); // 10 --> Es 9 está definido en la función c por parámetro
 }
 c(8,9,10);
 console.log(b); // 10
-console.log(x); // 10
+console.log(x); // 1
 ```
 
 ```javascript
 console.log(bar); // undefined
-console.log(baz); // 2
+console.log(baz); // 2 --> Da error ya que baz no está definido
 foo();
 function foo() { console.log('Hola!'); }
 var bar = 1;
@@ -67,8 +67,8 @@ if (true) {
     console.log(instructor); // The Flash
     console.log(pm); // Reverse Flash
 }
-console.log(instructor); // Tony
-console.log(pm); // Reverse Flash
+console.log(instructor); // The Flash
+console.log(pm); // Reverse Flash --> Es Franco ya que está definido con let
 ```
 ### Coerción de Datos
 
@@ -77,19 +77,19 @@ console.log(pm); // Reverse Flash
 ```javascript
 6 / "3" // 2
 "2" * "3" // 6
-4 + 5 + "px" // "45px"
+4 + 5 + "px" // "45px" --> "9px", primero suma los números y después agrega el "px" pasándolo a string
 "$" + 4 + 5 // "$45"
 "4" - 2 // 2
-"4px" - 2 // "2px"
-7 / 0 // undefined
-{}[0] // 
+"4px" - 2 // "2px" --> NaN, la suma concatena strings con números pero la resta no
+7 / 0 // infinity --> Cualquier número dividido por 0 en js da infinito
+{}[0] // undefined
 parseInt("09") // 9
-5 && 2 // true
-2 && 5 // true
-5 || 0 // true
-0 || 5 // false
+5 && 2 // 2
+2 && 5 // 5
+5 || 0 // 5
+0 || 5 // 5
 [3]+[3]-[10] // 23
-3>2>1 // false
+3>2>1 // false --> Porque 3>2 = true --> true = 1 --> 1>1 = false
 [] == ![] // true
 ```
 
@@ -102,7 +102,7 @@ parseInt("09") // 9
 
 ```javascript
 function test() {
-   console.log(a); // 1
+   console.log(a); // 1 --> undefined
    console.log(foo()); // 2
 
    var a = 1;
@@ -127,7 +127,7 @@ function getFood(food) {
     return snack;
 }
 
-getFood(false); // "Meow Mix"
+getFood(false); // "Meow Mix" --> Es undefined porque a getFood se le da false y por lo tanto no entra al if y nunca define snack
 ```
 
 
@@ -151,7 +151,7 @@ console.log(obj.prop.getFullname()); // "Aurelio De Rosa"
 
 var test = obj.prop.getFullname;
 
-console.log(test()); // "Natalia Nerea"
+console.log(test()); // "Natalia Nerea" --> "Juan Pérez", test al ser definido en un var, se desliga del objeto, dejando de ser un método y se convierte en una función
 ```
 
 ### Event loop
