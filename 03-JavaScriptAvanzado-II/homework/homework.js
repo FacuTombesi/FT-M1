@@ -48,7 +48,17 @@ function cacheFunction(cb) {
 
   */
 
-  
+  var cache = {};
+
+  return function(arg) {
+    if (cache.hasOwnProperty(arg)) { // Si el argumento (arg) está en mi objeto...
+      return cache[arg]; // [] notation busca el valor dentro de la propiedad y . notation busca la propiedad con el nombre que se le pasa
+    } else {
+      var res = cb(arg); // Guarda el resultado de cb(arg) para no ejecutar cb innecesariamente
+      cache[arg] = res;
+      return res;
+    }
+  }
 }
 
 // Bind
