@@ -24,17 +24,17 @@ function Node(value) {
 LinkedList.prototype.add = function (value) {
   var newNode = new Node(value);
   var current = this.head;
-
+  // Me fijo si la lista está vacía
   if(!this.head) {
     this.head = newNode;
     this._length++;
     return newNode;
   }
-
+  // Recorro la lista si no está vacía
   while (current.next) {
     current = current.next;
   }
-
+  // Cuando termino de recorrer la lista y llego al último nodo, agrego un nuevo nodo
   current.next = newNode;
   this._length++;
   return newNode;
@@ -42,22 +42,25 @@ LinkedList.prototype.add = function (value) {
 
 LinkedList.prototype.remove = function () {
   var current = this.head;
-
-  if (this.head === null) {
+  // Me fijo si la lista está vacía
+  if (!this.head) {
     return null;
   }
-
-  if (this.head.next === null) {
+  // Verifico si hay un sólo nodo
+  if (!this.head.next) {
+    var aux = this.head;
     this.head = null;
-    return current.value;
+    this._length--;
+    return aux.value;
   }
-
+  // Recorro la lista
   while (current.next.next) {
     current = current.next;
   }
-
+  // Remuevo el último nodo
   var aux = current.next;
   current.next = null;
+  this._length--;
   return aux.value;
 }
 
@@ -123,22 +126,43 @@ HashTable.prototype.set = function (key, value) {
   if (typeof key !== "string") {
     throw new TypeError("Keys must be strings");
   }
-
+  // Si no tengo algo en ...
   if (!this.buckets[index]) {
+    // Crea un objeto para ingresarle un valor en una propiedad y guardar el número de hash
     this.buckets[index] = {};
   }
-
+  // Asigna el valor de hash en una nueva propiedad de objeto llamada key
   this.buckets[index][key] = value;
 }
 
 HashTable.prototype.get = function (key) {
   var index = this.hash(key);
   return this.buckets[index][key];
+
+  // OTRA ALTERNATIVA
+  /*
+  if (this.buckets[index]) {
+    return this.buckets[index][key];
+  }
+  else {
+    return null;
+  }
+  */
 }
 
 HashTable.prototype.hasKey = function (key) {
   var index = this.hash(key);
   return this.buckets[index].hasOwnProperty(key);
+
+  // OTRA ALTERNATIVA
+  /*
+  if (this.get(key)) {
+    return true;
+  }
+  else {
+    return false;
+  }
+  */
 }
 
 // No modifiquen nada debajo de esta linea
