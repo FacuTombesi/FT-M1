@@ -152,7 +152,7 @@ BinarySearchTree.prototype.sum = function() {
     if (!this.left && !this.right) return this.value; // Si no hay left y right, devuelve el valor actual
     if (this.left && !this.right) return this.value + this.left.sum(); // Si hay left pero no right, devuelve el valor actual + la recursión de left
     if (!this.left && this.right) return this.value + this.right.sum(); // Si hay right pero no left, devuelve el valor actual + la recursión de right
-    if (this.left && this.right) return this.value + this.left.sum() + this.right.sum(); // Si hay ambos, devuelve el valor actual + la recursividad de left y right
+    return this.value + this.left.sum() + this.right.sum(); // Si hay ambos, devuelve el valor actual + la recursividad de left y right
     */
 }
 
